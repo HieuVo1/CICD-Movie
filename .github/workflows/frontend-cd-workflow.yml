@@ -34,4 +34,5 @@ jobs:
 
       - name: Build docker image
         run: |
+          cd starter/frontend
           docker build -t first-image:latest .
