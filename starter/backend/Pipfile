@@ -8,10 +8,10 @@ flask = "*"
 uwsgi = "*"
 flask-cors = "*"
 pytest = "*"
+flake8 = "*"
 
 [dev-packages]
 black = "*"
-flake8 = "*"
 coverage = "*"
 
 [requires]
