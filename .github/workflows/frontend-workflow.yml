@@ -1,0 +1,63 @@
+name: front-workflow
+
+on:
+  pull_request:
+    types:
+      - opened
+    branches:
+      - main
+  
+  workflow_dispatch:
+
+jobs:
+
+  lint:
+    run-on: ubuntu-latest
+    steps:
+      - name: Checkout source code
+        uses: actions/checkout@v3
+
+      - name: Setup Node Js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+      
+      - name: Install Dependency
+        run: cd starter/frontend &&  npm ci    
+
+      - name: Run lint
+        run: cd starter/frontend &&  npm run lint    
+  test:
+    run-on: ubuntu-latest
+    steps:
+      - name: Checkout source code
+        uses: actions/checkout@v3
+
+      - name: Setup Node Js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: Install Dependency
+        run: cd starter/frontend &&  npm ci 
+
+      - name: Run Test
+        run: cd starter/frontend &&  npm test
+
+  build:
+    run-on: ubuntu-latest
+    needs: [lint, test]
+    steps:
+      - name: Checkout source code
+        uses: actions/checkout@v3
+
+      - name: Setup Node Js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: Install Dependency
+        run: cd starter/frontend &&  npm ci 
+
+      - name: Run Build
+        run: cd starter/frontend &&  npm run build
