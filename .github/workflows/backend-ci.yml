@@ -22,6 +22,9 @@ jobs:
           python-version: '3.10'
           cache: 'pipenv'
 
+      - name: Install pipenv
+        run: pip install pipenv
+
       - name: Install Dependency
         run: cd starter/backend &&  pipenv install
 
@@ -38,6 +41,9 @@ jobs:
         with:
           python-version: '3.10'
           cache: 'pipenv'
+
+      - name: Install pipenv
+        run: pip install pipenv
 
       - name: Install Dependency
         run: cd starter/backend &&  pipenv install
@@ -57,6 +63,9 @@ jobs:
         with:
           python-version: '3.10'
           cache: 'pipenv'
+          
+      - name: Install pipenv
+        run: pip install pipenv
 
       - name: Install Dependency
         run: cd starter/backend &&  pipenv install
