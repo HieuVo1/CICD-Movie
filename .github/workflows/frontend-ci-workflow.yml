@@ -1,4 +1,4 @@
-name: frontend-workflow
+name: frontend-ci-workflow
 
 on:
   pull_request:
