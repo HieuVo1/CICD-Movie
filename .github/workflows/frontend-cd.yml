@@ -64,11 +64,12 @@ jobs:
     needs: build
     steps:
       - name: Set up kubectl
-        uses: azure/setup-kubectl@v2
+        uses: azure/setup-kubectl@v3
         with:
           version: 'latest'
           
       - name: Deploy to Kubernetes
         run: |
           echo "${{ secrets.KUBECONFIG }}" > kubeconfig.yaml
+          cd starter/frontend/k8s
           kubectl apply -f deployment.yml --kubeconfig=kubeconfig.yaml
