@@ -63,12 +63,12 @@ jobs:
         with:
           python-version: '3.10'
           cache: 'pipenv'
-          
+
       - name: Install pipenv
         run: pip install pipenv
 
       - name: Install Dependency
         run: cd starter/backend &&  pipenv install
 
-      - name: Run Test
+      - name: Run Build
         run: cd starter/backend &&  pipenv run serve
