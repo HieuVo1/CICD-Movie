@@ -81,13 +81,17 @@ jobs:
         with:
           version: "latest"
 
+      - name: Setup Credential
+        run: |
+          cd setup
+          ./init.sh
+
       - name: Deploy to Kubernetes
         env:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
           ECR_REPOSITORY: ${{ env.REPO_NAME }}
           IMAGE_TAG: ${{ github.sha }}
         run: |
-          echo "${{ secrets.KUBECONFIG }}" > starter/frontend/k8s/kubeconfig.yaml
           cd starter/frontend/k8s
-          kustomize edit set image backend=$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
-          kubectl apply -f deployment.yml --kubeconfig=kubeconfig.yaml
+          kustomize edit set image frontend=$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+          kustomize build | kubectl apply -f -
