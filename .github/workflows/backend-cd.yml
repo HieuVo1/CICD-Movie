@@ -26,9 +26,6 @@ jobs:
       - name: Install pipenv
         run: pip3 install pipenv
 
-      - name: Active virtual environment
-        run: python3 -m pipenv shell
-
       - name: Install Dependency
         run: cd starter/backend &&  pipenv install
 
