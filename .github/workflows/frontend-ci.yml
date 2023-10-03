@@ -1,4 +1,4 @@
-name: frontend-ci-workflow
+name: Frontend Continuous Integration
 
 on:
   pull_request:
@@ -6,7 +6,7 @@ on:
       - closed
     branches:
       - master
-  
+
   workflow_dispatch:
 
 jobs:
@@ -20,12 +20,12 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 18
-      
+
       - name: Install Dependency
-        run: cd starter/frontend &&  npm ci    
+        run: cd starter/frontend &&  npm ci
 
       - name: Run lint
-        run: cd starter/frontend &&  npm run lint    
+        run: cd starter/frontend &&  npm run lint
   test:
     runs-on: ubuntu-latest
     steps:
@@ -38,7 +38,7 @@ jobs:
           node-version: 18
 
       - name: Install Dependency
-        run: cd starter/frontend &&  npm ci 
+        run: cd starter/frontend &&  npm ci
 
       - name: Run Test
         run: cd starter/frontend &&  npm test
@@ -56,7 +56,7 @@ jobs:
           node-version: 18
 
       - name: Install Dependency
-        run: cd starter/frontend &&  npm ci 
+        run: cd starter/frontend &&  npm ci
 
       - name: Run Build
         run: cd starter/frontend &&  npm run build

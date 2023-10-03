@@ -1,9 +1,7 @@
-name: backend-cd-workflow
+name: Backend Continuous Deployment
 
 on:
-  pull_request:
-    types:
-      - closed
+  push:
     branches:
       - master
 
