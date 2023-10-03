@@ -82,11 +82,9 @@ jobs:
         with:
           version: "latest"
 
-      - name: Setup Credential
+      - name: Connect to cluster
         run: |
-          cd setup
-          chmod +x ./init.sh
-          ./init.sh
+          aws eks update-kubeconfig --name cluster
 
       - name: Deploy to Kubernetes
         env:
