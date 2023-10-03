@@ -4,13 +4,13 @@ on:
   push:
     branches:
       - master
-  
+
   workflow_dispatch:
 
 env:
   REPO_NAME: "project4-frontend"
 
-jobs:  
+jobs:
   test:
     runs-on: ubuntu-latest
     steps:
@@ -23,7 +23,7 @@ jobs:
           node-version: 18
 
       - name: Install Dependency
-        run: cd starter/frontend &&  npm ci 
+        run: cd starter/frontend &&  npm ci
 
       - name: Run Test
         run: cd starter/frontend &&  npm test
@@ -34,7 +34,7 @@ jobs:
     steps:
       - name: Checkout source code
         uses: actions/checkout@v3
-    
+
       - name: Configure AWS Credential
         uses: aws-actions/configure-aws-credentials@v2
         with:
@@ -79,14 +79,15 @@ jobs:
       - name: Set up kubectl
         uses: azure/setup-kubectl@v3
         with:
-          version: 'latest'
-          
+          version: "latest"
+
       - name: Deploy to Kubernetes
         env:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
           ECR_REPOSITORY: ${{ env.REPO_NAME }}
           IMAGE_TAG: ${{ github.sha }}
         run: |
-          echo "${{ secrets.KUBECONFIG }}" > kubeconfig.yaml
+          echo "${{ secrets.KUBECONFIG }}" > starter/frontend/k8s/kubeconfig.yaml
+          cd starter/frontend/k8s
           kustomize edit set image backend=$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
-          kubectl apply -f starter/frontend/k8s/deployment.yml --kubeconfig=kubeconfig.yaml
+          kubectl apply -f deployment.yml --kubeconfig=kubeconfig.yaml
