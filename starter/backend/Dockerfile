@@ -12,7 +12,8 @@ RUN apk update && \
   linux-headers \
   openssl \
   libffi-dev \
-  && pip3 install pipenv
+  && pip install pipenv
+
 
 RUN mkdir -p /var/www/app && mkdir /app
 
