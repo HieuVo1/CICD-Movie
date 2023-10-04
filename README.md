@@ -9,6 +9,7 @@ The team's project is comprised of 2 application.
 
 In the `starter` folder, you'll find 2 folders, one named `frontend` and one named `backend`, where each application's source code is maintained. Your job is to use the team's [existing documentation](./starter/frontend/frontend-development-notes) and create CI/CD pipelines to meet the teams' needs.
 
+App URL: http://a4c6da67cde4a4d48a794ba9a45248f9-1652341913.us-east-1.elb.amazonaws.com
 ## Deliverables
 
 ### Frontend
