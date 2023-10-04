@@ -12,14 +12,16 @@ RUN apk update && \
   linux-headers \
   openssl \
   libffi-dev \
-  && pip install pipenv
-
+  && pip install pipenv 
 
 RUN mkdir -p /var/www/app && mkdir /app
 
 COPY Pipfile* /app
-RUN cd /app && pipenv install --system --deploy
+RUN cd /app && pipenv install uwsgi && pipenv install --system --deploy
 
 COPY . /app
+
+# Expose port 80 for uWSGI
+EXPOSE 5000
 
 CMD uwsgi --http :5000 --master --enable-threads -s /var/www/app/app.sock --manage-script-name --mount /=app:app
