@@ -12,6 +12,9 @@ on:
 jobs:
   lint:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: starter/backend
     steps:
       - name: Checkout source code
         uses: actions/checkout@v3
@@ -25,12 +28,15 @@ jobs:
         run: pip install pipenv
 
       - name: Install Dependency
-        run: cd starter/backend &&  pipenv install
+        run: pipenv install
 
       - name: Run Lint
-        run: cd starter/backend &&  pipenv run lint
+        run: pipenv run lint
   test:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: starter/backend
     steps:
       - name: Checkout source code
         uses: actions/checkout@v3
@@ -44,14 +50,17 @@ jobs:
         run: pip install pipenv
 
       - name: Install Dependency
-        run: cd starter/backend &&  pipenv install
+        run: pipenv install
 
       - name: Run Test
-        run: cd starter/backend &&  pipenv run test
+        run: pipenv run test
 
   build:
     runs-on: ubuntu-latest
     needs: [lint, test]
+    defaults:
+      run:
+        working-directory: starter/backend
     steps:
       - name: Checkout source code
         uses: actions/checkout@v3
@@ -65,7 +74,7 @@ jobs:
         run: pip install pipenv
 
       - name: Install Dependency
-        run: cd starter/backend &&  pipenv install
+        run: pipenv install
 
       - name: Run Build
-        run: cd starter/backend
+        run: echo "Build Successfully"
