@@ -63,7 +63,6 @@ jobs:
           ECR_REPOSITORY: ${{ env.REPO_NAME }}
           IMAGE_TAG: ${{ github.sha }}
         run: |
-          cd starter/frontend
           export EXTERNALIP=$(kubectl get svc backend -o=jsonpath='{.status.loadBalancer.ingress[0].hostname}{"\n"}{.status.loadBalancer.ingress[0].ip}')
           echo "Backend API Url" $EXTERNALIP
           docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG --build-arg=REACT_APP_MOVIE_API_URL=http://$EXTERNALIP .
@@ -74,6 +73,9 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     needs: build
+    defaults:
+      run:
+        working-directory: starter/frontend
     steps:
       - name: Checkout source code
         uses: actions/checkout@v3
@@ -105,6 +107,6 @@ jobs:
           ECR_REPOSITORY: ${{ env.REPO_NAME }}
           IMAGE_TAG: ${{ github.sha }}
         run: |
-          cd starter/frontend/k8s
+          cd k8s
           kustomize edit set image frontend=$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
           kustomize build | kubectl apply -f -
