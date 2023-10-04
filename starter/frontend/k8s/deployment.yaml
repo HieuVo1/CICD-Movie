@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: frontend
-          image: 165337638898.dkr.ecr.us-east-1.amazonaws.com/project4-frontend:3bea22f6bfd15f4b7646851ac257e36b3453bc28
+          image: frontend
           imagePullPolicy: Always
           ports:
             - containerPort: 3000
