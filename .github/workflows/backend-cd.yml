@@ -12,6 +12,10 @@ env:
 jobs:
   test:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash
+        working-directory: starter/backend
     steps:
       - name: Checkout source code
         uses: actions/checkout@v3
@@ -19,16 +23,16 @@ jobs:
       - name: Setup Python
         uses: actions/setup-python@v4
         with:
-          python-version: "3.11"
+          python-version: "3.10"
 
       - name: Install pipenv
         run: pip install pipenv
 
       - name: Install Dependency
-        run: cd starter/backend &&  pipenv install
+        run: pipenv install
 
       - name: Run Test
-        run: cd starter/backend &&  pipenv run test
+        run: pipenv run test
 
   build:
     runs-on: ubuntu-latest
